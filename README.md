@@ -1,7 +1,7 @@
 # dynamics-ts-webpack
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/angelojea/dynamics-ts-webpack/main/logo.png" style="max-width: 100%;width: 100px;">
+    <img src="https://raw.githubusercontent.com/angelojea/dynamics-ts-webpack/main/logo.png" style="max-width: 100%;width: 150px;">
 </div>
 
 ## Prerequisites
