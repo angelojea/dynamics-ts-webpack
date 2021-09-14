@@ -62,8 +62,6 @@
     "path": "^0.12.7",
     "pcf-scripts": "^1",
     "pcf-start": "^1",
-    "pug": "^3.0.0",
-    "pug-loader": "^2.4.0",
     "request": "^2.88.2",
     "sass": "^1.32.8",
     "sass-loader": "9.0.1",
@@ -79,7 +77,6 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "office-ui-fabric-react": "^7.162.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1"
   }
