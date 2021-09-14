@@ -102,3 +102,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# AOJ
+deployer/
+package-lock.json
