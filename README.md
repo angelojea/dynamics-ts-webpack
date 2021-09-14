@@ -1,5 +1,7 @@
 # dynamics-ts-webpack
 
+<img src="https://raw.githubusercontent.com/angelojea/dynamics-ts-webpack/main/logo.png" />
+
 ## Prerequisites
 
 <ul>

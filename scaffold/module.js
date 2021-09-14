@@ -28,7 +28,7 @@ async function run() {
     if (!entryMatch) process.exit();
     
     fs.writeFileSync(__dirname + '/' + constants.webpackConfigFilePath,
-        webpackConfig.splice(entryMatch.index, 0, `\t${constants.prefix + '_' + moduleName}: \'${constants.webpackRelativePathToModules + constants.prefix + '_' + moduleName + '.ts'}\',\n\t`));
+        webpackConfig.splice(entryMatch.index, 0, `\n\t${constants.prefix + '_' + moduleName}: \'${constants.webpackRelativePathToModules + constants.prefix + '_' + moduleName + '.ts'}\',`));
     
     process.exit();
 }

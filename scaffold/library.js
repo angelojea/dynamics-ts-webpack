@@ -103,13 +103,13 @@ async function run() {
 
             const importMatch = [...moduleContent.matchAll(/(.|\r|\n)(?=} from "..\/src\/libraries";)/g)][0];
             if (importMatch) {
-                moduleContent = moduleContent.splice(importMatch.index, 0, `\t${libName},\n`);
+                moduleContent = moduleContent.splice(importMatch.index, 0, `\n\t${libName},`);
             }
             //
             
             const moduleMatch = [...moduleContent.matchAll(/(.|\r|\n)(?=};)/g)][0];
             if (moduleMatch) {
-                moduleContent = moduleContent.splice(moduleMatch.index, 0, `\t'${libName}': ${libName},\n`);
+                moduleContent = moduleContent.splice(moduleMatch.index, 0, `\n\t'${libName}': ${libName},`);
             }
 
             fs.writeFileSync(modulePath, moduleContent);

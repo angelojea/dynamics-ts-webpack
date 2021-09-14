@@ -5,7 +5,7 @@ if (!String.prototype.splice) {
 }
 
 module.exports = {
-    moduleAlias: 'MillardD365',
+    moduleAlias: 'AOJ',
     prefix: 'aoj',
 
     modulesWorkingDir: '../modules',
