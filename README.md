@@ -6,10 +6,9 @@
 
 ## Prerequisites
 
-<ul>
-<li>Git (<a href="https://git-scm.com/download/win/">here</a>)</li>
-<li>Nodejs v10 or later (<a href="https://nodejs.org/en/download/">here</a>)</li>
-</ul>
+* Visual Studio Code (<a href="https://code.visualstudio.com/">here</a>)</li>
+* Git (<a href="https://git-scm.com/download/win/">here</a>)</li>
+* Nodejs v10 or later (<a href="https://nodejs.org/en/download/">here</a>)</li>
 
 ## Installation
 
