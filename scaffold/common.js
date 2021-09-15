@@ -20,12 +20,13 @@ module.exports = {
     indexFile: 'index.ts',
 
     //Models config
-    outputPath: 'C:\\Users\\Angel\\Desktop\\models',
+    outputPath: 'C:\\Users\\Angel\\Documents\\repos\\dynamics-ts-webpack\\src\\models',
+    // outputPath: 'C:\\Users\\Angel\\Desktop\\models',
     fieldsPrefix: 'aoj',
     crmConfig: {
-        url: 'https://org328b43f9.crm.dynamics.com/',
-        clientId: "6ecdbb25-75c0-43b8-85f7-47b0143a9920",
-        clientSecret: "N_-84Lca194c2G8ef~rx44G2y94Up3kR~7",
-        azureTenantId: '901ec0f3-4101-4bf0-b3af-9ae8126d0225'
+        url: 'https://org94ea73b8.crm.dynamics.com/',
+        clientId: "3001a7d0-b4e5-43e6-9213-20a879b3833b",
+        clientSecret: "qfl7Q~sJrm0P0X09p3xc3s.y5jWnAskolTliP",
+        azureTenantId: '05cada01-c884-4f47-9e36-a315c58eaa07'
     }
 }

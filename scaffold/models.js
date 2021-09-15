@@ -80,10 +80,12 @@ async function run() {
                     || !attribute.DisplayName.UserLocalizedLabel.Label) {
                     attDisplayName = attLogicalName;
                 }
-                else attDisplayName = attribute.DisplayName.UserLocalizedLabel.Label.replace(/[^a-zA-Z]/g, '');
+                else attDisplayName = attribute.DisplayName.UserLocalizedLabel.Label.replace(/[^a-zA-Z0-9]/g, '');
 
                 // OptionSet Attributes
-                if (attribute['AttributeType'] === 'Picklist') {
+                // Only adds to the dictionary if it's not there already
+                if (attribute['AttributeType'] === 'Picklist'
+                && !Object.values(attDisplayNameDictionary).find(x => x === attDisplayNameDictionary)) {
 
                     optionSetsToRetrieve.push({
                         entity: entityLogicalName,
@@ -145,23 +147,26 @@ async function run() {
                                 .filter((v, i, s) => s.indexOf(v) === i);
             
             attributes.forEach(y => {
-                const optionSets = optionSetsMetadata
+                let optionSets = optionSetsMetadata
                     .filter(z => z['objecttypecode'] === entityName & z['attributename'] === y)
                     .map(z => ({ label: z['value'], value: z['attributevalue'] }));
+                
+                optionSets = [...new Map(optionSets.map(item => [item['label'], item])).values()];
                 
                 let enumContent = `export enum ${entityDisplayName}Model${attDisplayNameDictionary[entityName+y]} {`;
                 
                 for (let k = 0; k < optionSets.length; k++) {
                     const optionSet = optionSets[k];
-                    let optionSetLabel = optionSet.label.replace(/[^a-z0-9]/gi, '') || 'Empty' + Date.now();
+                    let optionSetLabel = optionSet.label.replace(/[^a-z0-9\$]/gi, '') || 'Empty' + Date.now();
                     const optionSetValue = optionSet.value;
 
-                    if (optionSetLabel[0].match(/[0-9]/g)) optionSetLabel = 'N' + optionSetLabel;
+                    if (optionSetLabel[0].match(/^[0-9]/g)) optionSetLabel = 'N' + optionSetLabel;
 
                     enumContent += `\n\t${optionSetLabel} = ${optionSetValue},`;
                 }
                 enumContent += `\n}`;
 
+                if (x.content.includes(enumContent)) return;
                 x.content = x.content.replace(`#${entityName}-${y}#`, enumContent);
             });
 
