@@ -224,17 +224,6 @@ export const Form = {
         Form.setFieldValue(field, null, form);
         Form.changeRequiredLevel(field, prev, form);
     },
-    validateDatesLogic: (startdatefield: string, enddatefield: string, form = AojXrm.Page): boolean => {
-        const startdate = form.getAttribute(startdatefield);
-        if (!startdate) return;
-        if (!startdate.getValue()) return;
-
-        const enddate = form.getAttribute(enddatefield);
-        if (!enddate) return;
-        if (!enddate.getValue()) return;
-        
-        return enddate.getValue() < startdate.getValue();
-    },
     refreshSubgrid: (name: string, form = AojXrm.Page): void => {
         const subgrid = form.ui.controls.get(name);
         //@ts-ignore
@@ -247,7 +236,7 @@ export const Form = {
         return workingDoc.evaluate(xpath, workingDoc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
     },
     showFormNotification: (msg: string, type: Xrm.FormNotificationLevel): void => {
-        AojXrm.Page.ui.setFormNotification(msg, type, null);
+        AojXrm.Page.ui.setFormNotification(msg, type, '');
     },    
     hideFormNotification: (): void => {
         //@ts-ignore
