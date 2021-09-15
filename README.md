@@ -54,8 +54,7 @@ npm run new-lib
 ```
 
 * <span>[BETA]</span> Generate the model classes
-    * On the file *scaffold/common.js* adjust the *crmConfig* section with the credentials to authenticate to your Dynamics instance 
-    * <div>
+    * On the file *scaffold/common.js* adjust the *crmConfig* section with the credentials to authenticate to your Dynamics instance <div>
     ```javascript
         crmConfig: {
             url: 'https://org94ea73b8.crm.dynamics.com/',
