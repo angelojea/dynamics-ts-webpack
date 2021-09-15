@@ -55,16 +55,16 @@ npm run new-lib
 
 * <span>[BETA]</span> Generate the model classes
     * On the file *scaffold/common.js* adjust the *crmConfig* section with the credentials to authenticate to your Dynamics instance 
-
-```javascript
-    crmConfig: {
-        url: 'https://org94ea73b8.crm.dynamics.com/',
-        clientId: "3001a7d0-b4e5-43e6-9213-20a879b3833b",
-        clientSecret: "qfl7Q~sJrm0P0X09p3xc3s.y5jWnAskolTliP",
-        azureTenantId: '05cada01-c884-4f47-9e36-a315c58eaa07'
-    }
-```
-* 
+    * <div>
+    ```javascript
+        crmConfig: {
+            url: 'https://org94ea73b8.crm.dynamics.com/',
+            clientId: "3001a7d0-b4e5-43e6-9213-20a879b3833b",
+            clientSecret: "qfl7Q~sJrm0P0X09p3xc3s.y5jWnAskolTliP",
+            azureTenantId: '05cada01-c884-4f47-9e36-a315c58eaa07'
+        }
+    ```
+    </div>
     * Run the command below
 
 ```sh
