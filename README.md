@@ -64,6 +64,7 @@ npm run new-lib
         azureTenantId: '05cada01-c884-4f47-9e36-a315c58eaa07'
     }
 ```
+* 
     * Run the command below
 
 ```sh
