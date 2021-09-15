@@ -54,7 +54,7 @@ npm run new-lib
 ```
 
 * <span>[BETA]</span> Generate the model classes
-    ⋅⋅* On the file *scaffold/common.js* adjust the *crmConfig* section with the credentials to authenticate to your Dynamics instance 
+    * On the file *scaffold/common.js* adjust the *crmConfig* section with the credentials to authenticate to your Dynamics instance 
 
 ```javascript
     crmConfig: {
@@ -64,7 +64,7 @@ npm run new-lib
         azureTenantId: '05cada01-c884-4f47-9e36-a315c58eaa07'
     }
 ```
-    ⋅⋅* Run the command below
+    * Run the command below
 
 ```sh
 npm run generate-models
