@@ -52,3 +52,7 @@ npm run new-module
 ```sh
 npm run new-lib
 ```
+
+## License
+
+This project is licensed under the terms of the [MIT license](/LICENSE).

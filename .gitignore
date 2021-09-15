@@ -104,5 +104,6 @@ dist
 .tern-port
 
 # AOJ
+.vscode/
 deployer/
 package-lock.json
