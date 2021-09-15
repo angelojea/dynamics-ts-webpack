@@ -1,34 +1,31 @@
-import { Spinner, SpinnerSize } from "office-ui-fabric-react";
+// React
 import * as React from "react";
 
+// External
+import { Spinner, SpinnerSize } from "office-ui-fabric-react";
+import { ComboBox } from "@fluentui/react";
+import { PCFControlContextService } from "pcf-react";
+
+// PCF generated
 import { IInputs } from "./generated/ManifestTypes";
 
+// My own classes
 import { DataService } from "../../services";
 import { ContactModel } from "../../models";
-import { Dropdown } from "@fluentui/react";
 
-export interface ComponentProps {
-	context: ComponentFramework.Context<IInputs>,
-}
-interface ComponentState {
-	loading: boolean,
-	contacts: any[]
+interface ComponentProps {
+	service: PCFControlContextService
 }
 
-export class Component extends React.Component<ComponentProps, ComponentState> {
-	public result: string = '';
+export const Component: React.FC<ComponentProps> = ({
+	service
+}) => {
+	const [loading, setLoading] = React.useState<boolean>(true);
+	const [contacts, setContacts] = React.useState<any[]>([]);
 
-	constructor(props: ComponentProps) {
-		super(props);
+	React.useEffect(() => {
 
-		this.state = { contacts: [], loading:  true }
-	}
-
-	componentDidMount = async (): Promise<void> => {
-		try {
-			this.setState({ loading: true });
-
-			let records = await DataService.runFetch(ContactModel._entityPluralName, `
+		DataService.runFetch(ContactModel._entityPluralName, `
 			<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
 			  <entity name="${ContactModel._entityName}">
 				<attribute name="${ContactModel._id}" />
@@ -37,25 +34,25 @@ export class Component extends React.Component<ComponentProps, ComponentState> {
 				  <condition attribute='${ContactModel.statecode}' operator='eq' value='0' />
 				</filter>
 			  </entity>
-			</fetch>`);
-
-			this.setState({
-				contacts: records.map(x => ({ key: x[ContactModel._id], text: x[ContactModel.fullname] })),
-				loading: false
+			</fetch>`)
+			.then(records =>{
+				setContacts(records.map(x => ({ key: x[ContactModel._id], text: x[ContactModel.fullname] })));
+				setLoading(false);
+			})
+			.catch(error => {
+				setLoading(false);
+				Xrm.Navigation.openErrorDialog({ message: error + '' });
 			});
-		}
-		catch (error) {
-			this.result = this.result;
-			this.setState({ loading: false });
-			Xrm.Navigation.openErrorDialog({ message: error + '' });
-		}
-	}
+	});
 
-	render = () => {
-		return (
-			this.state.loading ?
-				<Spinner size={SpinnerSize.small} />
-				:
-				<Dropdown placeholder="Select a contact" options={this.state.contacts} />);
-	}
-}
+	return (
+		loading ?
+			<Spinner size={SpinnerSize.small} />
+			:
+			<ComboBox
+				placeholder="Select a contact"
+				selectedKey={service.getParameters<IInputs>().sampleProperty.raw}
+				options={contacts}
+				onChange={(ev, op) => service.setParameters({ sampleProperty: op?.key + '' })}
+			/>);
+};
