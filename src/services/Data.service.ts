@@ -3,7 +3,7 @@ import { EntityPluralNames } from "../constants";
 const apiVersion = 'v9.1';
 
 export const DataService = {
-    retrieveRecord: (entityPluralName: EntityPluralNames | string, id: string, query = ''): Promise<any> => {
+    retrieveRecord: (entityPluralName: EntityPluralNames, id: string, query = ''): Promise<any> => {
         id = id.replace('{', '').replace('}', '');
         
         return new Promise((res) => {
@@ -27,7 +27,7 @@ export const DataService = {
             req.send();
         });
     },
-    retrieveRecords: (entityPluralName: EntityPluralNames | string, query = ''): Promise<any[]> => {
+    retrieveRecords: (entityPluralName: EntityPluralNames, query = ''): Promise<any[]> => {
         return new Promise((res, rej) => {
             const req = new XMLHttpRequest();
             let results: any[] = [];
@@ -49,7 +49,7 @@ export const DataService = {
             req.send();
         });
     },
-    create: (entityPluralName: EntityPluralNames | string, entity: any): Promise<any> => {
+    create: (entityPluralName: EntityPluralNames, entity: any): Promise<any> => {
 
         return new Promise((res, rej) => {
             const req = new XMLHttpRequest();
@@ -77,7 +77,7 @@ export const DataService = {
             req.send(JSON.stringify(entity));
         });
     },
-    update: (entityPluralName: EntityPluralNames | string, id: string, entity: any): void => {
+    update: (entityPluralName: EntityPluralNames, id: string, entity: any): void => {
         id = id.replace('{', '').replace('}', '');
         
         const req = new XMLHttpRequest();
@@ -97,7 +97,7 @@ export const DataService = {
         };
         req.send(JSON.stringify(entity));
     },
-    delete: (entityPluralName: EntityPluralNames | string, id: string): void => {
+    delete: (entityPluralName: EntityPluralNames, id: string): void => {
         id = id.replace('{', '').replace('}', '');
 
         const req = new XMLHttpRequest();
@@ -213,7 +213,7 @@ export const DataService = {
         };
         req.send(JSON.stringify(parameters));
     },
-    runFetch: (entityPluralName: EntityPluralNames | string, fetch: string): Promise<any[]> => {
+    runFetch: (entityPluralName: EntityPluralNames, fetch: string): Promise<any[]> => {
 
         return new Promise((res, rej) => {
             fetch = fetch.replace(/\n/g, '').replace(/\s\s+/g, '');
