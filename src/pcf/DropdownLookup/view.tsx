@@ -15,51 +15,50 @@ import { ContactModel } from "../../models";
 interface ComponentProps {
 	service: PCFControlContextService
 }
+interface ComponentState {
+	loading: boolean,
+	contacts: any[]
+}
 
-let initialLoad = true;
-
-export const Component: React.FC<ComponentProps> = ({ service }) => {
-	const [loading, setLoading] = React.useState<boolean>(true);
-	const [contacts, setContacts] = React.useState<any[]>([]);
-
-	if (initialLoad) {
-		initialLoad = false;
-		retrieveContacts(setContacts, setLoading);
+export class Component extends React.Component<ComponentProps, ComponentState> {
+	constructor(props: any) {
+		super(props);
+		this.state = { loading: true, contacts: [] }
 	}
 
-	return (
-		loading ?
-			<Spinner size={SpinnerSize.small} />
-			:
-			<ComboBox
-				placeholder="Select a contact"
-				selectedKey={service.getParameters<IInputs>().sampleProperty.raw}
-				options={contacts}
-				onChange={(ev, op) => service.setParameters({ sampleProperty: op?.key + '' })}
-			/>);
-};
+	componentDidMount = async () => {
+		this.setState({ loading: true });
 
-
-async function retrieveContacts(setContacts: (x: any[]) => void, setLoading: (x: boolean) => void) {
-	setLoading(true);
-
-	try {
-		const records = await DataService.runFetch(ContactModel._entityPluralName, `
-		<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
-		  <entity name="${ContactModel._entityName}">
-			<attribute name="${ContactModel._id}" />
-			<attribute name="${ContactModel.fullname}" />
-			<filter type="and">
-			  <condition attribute='${ContactModel.statecode}' operator='eq' value='0' />
-			</filter>
-		  </entity>
-		</fetch>`);
-		
-		setContacts(records.map(x => ({ key: x[ContactModel._id], text: x[ContactModel.fullname] })));
-		setLoading(false);
+		try {
+			const records = await DataService.runFetch(ContactModel._entityPluralName, `
+			<fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+			  <entity name="${ContactModel._entityName}">
+				<attribute name="${ContactModel._id}" />
+				<attribute name="${ContactModel.fullname}" />
+				<filter type="and">
+				  <condition attribute='${ContactModel.statecode}' operator='eq' value='0' />
+				</filter>
+			  </entity>
+			</fetch>`);
+			
+			this.setState({
+				loading: false,
+				contacts: records.map(x => ({ key: x[ContactModel._id], text: x[ContactModel.fullname] }))
+			});
+		}
+		catch (error) {
+			this.setState({ loading: false });
+			Xrm.Navigation.openErrorDialog({ message: error + '' });
+		}
 	}
-	catch (error) {
-		setLoading(false);
-		Xrm.Navigation.openErrorDialog({ message: error + '' });
-	}
+
+	render = () => this.state.loading ?
+		<Spinner size={SpinnerSize.small} />
+		:
+		<ComboBox
+			placeholder="Select a contact"
+			selectedKey={this.props.service.getParameters<IInputs>().sampleProperty.raw}
+			options={this.state.contacts}
+			onChange={(ev, op) => this.props.service.setParameters({ sampleProperty: op?.key + '' })}
+		/>;
 }

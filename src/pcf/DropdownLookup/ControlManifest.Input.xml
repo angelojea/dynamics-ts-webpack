@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest>
-  <control namespace="Aoj.Pcf" constructor="DropdownLookup" version="0.0.35" display-name-key="DropdownLookup" description-key="DropdownLookup description" control-type="standard" preview-image="img/preview.png">
+  <control namespace="Aoj.Pcf" constructor="DropdownLookup" version="0.0.38" display-name-key="DropdownLookup" description-key="DropdownLookup description" control-type="standard" preview-image="img/preview.png">
     <property name="sampleProperty" display-name-key="Property_Display_Key" description-key="Property_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
     <resources>
       <code path="index.ts" order="1" />
