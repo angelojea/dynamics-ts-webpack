@@ -4,7 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    aoj_WebResourceTest: './modules/aoj_WebResourceTest.ts'
+    aoj_Random: './modules/aoj_RandomModule.ts'
 	},
   output: {
     filename: '[name].js',

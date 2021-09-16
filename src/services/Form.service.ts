@@ -230,11 +230,6 @@ export const Form = {
         if (subgrid) subgrid.refresh();
     },
 
-    getElementByXPath: (xpath: string): any => {
-        const workingDoc = window.top.document;
-
-        return workingDoc.evaluate(xpath, workingDoc, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
-    },
     showFormNotification: (msg: string, type: Xrm.FormNotificationLevel): void => {
         AojXrm.Page.ui.setFormNotification(msg, type, '');
     },    
